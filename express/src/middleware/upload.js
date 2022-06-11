@@ -1,26 +1,14 @@
-import multer from "multer";
-import {v4 as uuid} from 'uuid';
+import multer, { memoryStorage } from "multer";
+import {promisify} from 'util';
+import dotenv from "dotenv";
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "D:/BANGKIT 2022/get-people/resources/database_wajah/database/");
-  },
-  filename: (req, file, cb) => {
-    console.log(req);
-    const fileObj = {
-      "image/png": ".png",
-    };
-    if (fileObj[file.mimetype] == undefined) {
-      cb(new Error("Format foto harus .png"));
-    } else {
-      cb(null, uuid() + '-' + file.originalname);
-    }
-  },
-});
+dotenv.config();
 
-const uploadFile = multer({
-  storage: storage,
+export const uploadFile = multer({
+  storage: multer.memoryStorage(),
   limits: { fileSize: 1 * 1024 * 1024 },
-});
+}).single("image");
 
-export default uploadFile;
+const processFileMiddleware = promisify(uploadFile);
+
+export default processFileMiddleware;

@@ -10,8 +10,8 @@ const Victim = db.define('victims', {
     primaryKey: true,
     allowNull: false,
   },
-  photoUrl: {
-    type: DataTypes.TEXT,
+  image: {
+    type: DataTypes.STRING,
     allowNull: false,
   },
   posko: {
