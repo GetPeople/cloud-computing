@@ -4,11 +4,6 @@ SET GLOBAL time_zone = "+7:00";
 
 USE db_get_people;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -23,9 +18,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `users`
---
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `name`, `role`, `id_petugas`, `refresh_token`, `createdAt`, `updatedAt`) VALUES
 ('1ba40d76-46fd-4ffb-8818-06c92b54cd48', 'kurniyatul', 'kurniyatul@gmail.com', '$2b$10$1v3JXwvVIjbvOGdgsozuKu43MJAKFNTf8sGzxFGhzvxW4CuHMz2BW', 'nia', 'petugas', 'petugas12', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZFVzZXIiOiIxYmE0MGQ3Ni00NmZkLTRmZmItODgxOC0wNmM5MmI1NGNkNDgiLCJ1c2VybmFtZSI6Imt1cm5peWF0dWwiLCJlbWFpbCI6Imt1cm5peWF0dWxAZ21haWwuY29tIiwibmFtZSI6Im5pYSIsInJvbGUiOiJwZXR1Z2FzIiwiaWRfcGV0dWdhcyI6InBldHVnYXMxMiIsImlhdCI6MTY1NDc1ODg3MCwiZXhwIjoxNjU0ODQ1MjcwfQ.3KkZafJb4nO4-WSvXtsf-Ml7BEDl1zlv4b-JzvrEpeY', '2022-06-01 18:09:29', '2022-06-09 07:14:30'),
@@ -33,11 +25,6 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `name`, `role`, `id_
 ('5ea7427a-ff49-4817-b14d-7c6320a39e53', 'nia', 'kurniyatul555@gmail.com', '$2b$10$gnWoCdktKV4Pn0qcZgqPl.JQ7oMJHBg0IohCZ75YcHMCVDChMcEHy', 'kurniyatul', 'petugas', '55555', NULL, '2022-06-07 15:59:20', '2022-06-07 15:59:20'),
 ('868776d8-e7bf-43d2-a1ef-ffa25b0f48db', 'kurniyatul', 'kurniyatul25@gmail.com', '$2b$10$QbveymjirpypVLBHq0OnM.SYiFunJp0vpvt.7J6MJ0LkKF.Sz6mMS', 'nia', 'petugas', 'petugas12', NULL, '2022-06-01 16:17:51', '2022-06-01 16:17:51');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `victims`
---
 
 CREATE TABLE `victims` (
   `id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
@@ -54,9 +41,6 @@ CREATE TABLE `victims` (
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `victims`
---
 
 INSERT INTO `victims` (`id`, `image`, `posko`, `contact`, `name`, `gender`, `birthPlace`, `birthDate`, `momName`, `nik`, `createdAt`, `updatedAt`) VALUES
 ('444606c2-7833-40f1-b9bf-b7fe792a7259', 'https://storage.googleapis.com/get-people-model-project/database_wajah/5.jpg', 'Gambir', '085233225979', 'Fauzi Anggoro', 'Laki-Laki', 'Yogyakarta', '19/11/2000', 'Arum Sekarsari', '3904321911000004', '2022-06-12 08:21:32', '2022-06-12 08:21:32'),
@@ -69,24 +53,11 @@ INSERT INTO `victims` (`id`, `image`, `posko`, `contact`, `name`, `gender`, `bir
 ('c566873a-cb05-4143-a98a-863fa2971b0d', 'https://storage.googleapis.com/get-people-model-project/database_wajah/1.png', 'Gambir', '085233225979', 'Yoga Pramudana', 'Laki-Laki', 'Pamekasan', '24/05/2001', 'Endang Kusumaningsih', '3528042405010007', '2022-06-12 08:19:12', '2022-06-12 08:19:12'),
 ('fff56c47-5b79-4a48-9b68-7e954449a91f', 'https://storage.googleapis.com/get-people-model-project/database_wajah/3.png', 'Tanah Abang', '085233225979', 'Fara Pertiwi', 'Perempuan', 'Malang', '28/06/2001', 'Elok Widyawati', '4529036806010004', '2022-06-12 08:16:56', '2022-06-12 08:16:56');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `users`
---
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email` (`email`);
 
---
--- Indexes for table `victims`
---
 ALTER TABLE `victims`
   ADD PRIMARY KEY (`id`);
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
