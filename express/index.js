@@ -12,6 +12,8 @@ import { dirname } from 'path';
 dotenv.config();
 const app = express();
 
+const port = process.env.PORT || 8080;
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 global.__basedir = __dirname;
@@ -29,4 +31,4 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(router);
 
-app.listen(process.env.PORT, ()=> console.log("Server running at port " + process.env.PORT));
+app.listen(port, ()=> console.log("Server running at port " + port));
