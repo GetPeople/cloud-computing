@@ -25,16 +25,7 @@ export const register = async(req, res) => {
     password: "string|min:6",
   };
 
-  const id_petugas = req.body.id_petugas;
-
-  const idPetugas = id_petugas_arr.includes(id_petugas);
-
-  if (!idPetugas) {
-    return res.status(400).json({
-      status: "error",
-      message: "Id petugas tidak valid",
-    });
-  }
+  
 
   const v = new Validator();
 
@@ -60,12 +51,27 @@ export const register = async(req, res) => {
 
   const password = await bcrypt.hash(req.body.password, 10);
 
+  const role = req.body.role;
+
+  const id_petugas = req.body.id_petugas;
+
+  const idPetugas = id_petugas_arr.includes(id_petugas);
+
+  if (role == "petugas") {
+    if (!idPetugas) {
+      return res.status(400).json({
+        status: "error",
+        message: "Id petugas tidak valid",
+      });
+    }
+  }
+
   const data = {
     username: req.body.username,
     email: req.body.email,
     password,
     name: req.body.name,
-    role: "petugas",
+    role: req.body.role,
     id_petugas: req.body.id_petugas,
   };
 
