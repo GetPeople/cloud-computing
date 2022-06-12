@@ -98,11 +98,11 @@ export const login = async(req, res) => {
     const id_petugas = user[0].id_petugas;
 
     const accessToken = jwt.sign({idUser, username, email, name, role, id_petugas}, process.env.ACCESS_TOKEN_SECRET,{
-      expiresIn: '20m'
+      expiresIn: '3h'
     });
 
     const refreshToken = jwt.sign({idUser, username, email, name, role, id_petugas}, process.env.REFRESH_TOKEN_SECRET,{
-      expiresIn: '1d'
+      expiresIn: '3h'
     });
 
     await User.update({refresh_token: refreshToken},{

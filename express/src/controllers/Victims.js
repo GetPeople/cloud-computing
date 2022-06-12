@@ -12,7 +12,7 @@ export const getVictim = async(req, res) => {
   }
 }
 
-export const uploadImage = async(req, res, next) => {
+export const addVictim = async(req, res, next) => {
   
   const storage = new Storage({ keyFilename: process.env.KEYFILE_PATH });
   const bucket = storage.bucket(process.env.CLOUD_BUCKET);
@@ -23,7 +23,7 @@ export const uploadImage = async(req, res, next) => {
       return res.status(400).send({ message: "Gambar belum ditambahkan!" });
     }
     // Create a new blob in the bucket and upload the file data.
-    const blob = bucket.file(req.file.originalname);
+    const blob = bucket.file('database_wajah/' + req.file.originalname);
     const blobStream = blob.createWriteStream({
       resumable: false,
     });
@@ -38,32 +38,32 @@ export const uploadImage = async(req, res, next) => {
       );
       try {
         // Make the file public
-        await bucket.file(req.file.originalname).makePublic();
-
-        console.log(req.body);
+        await Victim.create({
+          image: publicUrl,
+          posko: req.body.posko,
+          contact: req.body.contact,
+          name: req.body.name,
+          gender: req.body.gender,
+          birthPlace: req.body.birthPlace,
+          birthDate: req.body.birthDate,
+          momName: req.body.momName,
+          nik: req.body.nik,
+        });
 
         try {
-          await Victim.create({
-            image: publicUrl,
-            posko: req.body.posko,
-            contact: req.body.contact,
-            name: req.body.name,
-            gender: req.body.gender,
-            birthPlace: req.body.birthPlace,
-            birthDate: req.body.birthDate,
-            momName: req.body.momName,
-            nik: req.body.nik,
-          });
-        } catch (err) {
+          await bucket.file(req.file.originalname).makePublic();
+          
+        } catch {
           return res.status(500).send({
-            message: err.message,
+            message:
+            `Upload gambar berhasil: ${req.file.originalname}`,
+            url: publicUrl,
+            
           })
         }
-      } catch {
+      } catch (err) {
         return res.status(500).send({
-          message:
-            `Upload gambar berhasil: ${req.file.originalname}, tapi akses tidak publik!`,
-          url: publicUrl,
+          message: err.message,
         });
       }
       res.status(200).send({
